@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bcs.mapper.DHUrlMapper" >
+  <resultMap id="BaseResultMap" type="com.bcs.pojo.DHUrl" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="urlname" property="urlname" jdbcType="VARCHAR" />
+    <result column="urladdress" property="urladdress" jdbcType="VARCHAR" />
+    <result column="urldescribe" property="urldescribe" jdbcType="VARCHAR" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, urlname, urladdress, urldescribe, cid, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dhurl
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dhurl
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bcs.pojo.DHUrl" >
+    insert into dhurl (id, urlname, urladdress, 
+      urldescribe, cid, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{urlname,jdbcType=VARCHAR}, #{urladdress,jdbcType=VARCHAR}, 
+      #{urldescribe,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bcs.pojo.DHUrl" >
+    insert into dhurl
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="urlname != null" >
+        urlname,
+      </if>
+      <if test="urladdress != null" >
+        urladdress,
+      </if>
+      <if test="urldescribe != null" >
+        urldescribe,
+      </if>
+      <if test="cid != null" >
+        cid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="urlname != null" >
+        #{urlname,jdbcType=VARCHAR},
+      </if>
+      <if test="urladdress != null" >
+        #{urladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="urldescribe != null" >
+        #{urldescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bcs.pojo.DHUrl" >
+    update dhurl
+    <set >
+      <if test="urlname != null" >
+        urlname = #{urlname,jdbcType=VARCHAR},
+      </if>
+      <if test="urladdress != null" >
+        urladdress = #{urladdress,jdbcType=VARCHAR},
+      </if>
+      <if test="urldescribe != null" >
+        urldescribe = #{urldescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        cid = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bcs.pojo.DHUrl" >
+    update dhurl
+    set urlname = #{urlname,jdbcType=VARCHAR},
+      urladdress = #{urladdress,jdbcType=VARCHAR},
+      urldescribe = #{urldescribe,jdbcType=VARCHAR},
+      cid = #{cid,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
