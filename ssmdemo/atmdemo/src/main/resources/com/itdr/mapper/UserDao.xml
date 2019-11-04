@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itdr.mapper.UserDao">
+    <select id="getOne" parameterType="integer" resultType="com.itdr.pojo.Users">
+      select * from users where id=#{uid}
+  </select>
+
+    <insert id="addOne" parameterType="com.itdr.pojo.Users">
+         insert into users values (null,#{age},#{uname},#{psd},now(),#{money})
+    </insert>
+
+    <update id="updateOne" parameterType="com.itdr.pojo.Users">
+        update users set cdate=now() where uname = #{uname}
+    </update>
+
+    <delete id="deleteOne" parameterType="com.itdr.pojo.Users">
+        delete from users where uname = #{uname}
+    </delete>
+
+</mapper>

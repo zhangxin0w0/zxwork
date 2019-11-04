@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--读取外部配置文件-->
+    <properties resource="jdbc.properties"/>
+
+    <!--设置类别名，简化书写-->
+    <typeAliases>
+        <package name="com.itdr.pojo"/>
+    </typeAliases>
+
+    <!--使用JDBC管理事务，配置数据库连接属性-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--映射文件地址，通过核心配置文件加载映射文件-->
+    <mappers>
+        <package name="com.itdr.mapper"/>
+    </mappers>
+</configuration>
