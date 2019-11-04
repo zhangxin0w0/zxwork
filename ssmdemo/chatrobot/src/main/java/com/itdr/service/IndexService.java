@@ -1,5 +1,7 @@
 package com.itdr.service;
 
+import com.itdr.pojo.ReplyContent;
+
 import java.util.List;
 
 /**
@@ -14,5 +16,9 @@ public interface IndexService {
 
     String getAutoReply();
 
-    List<String> getReply(String keyword, String words);
+    List<String> getReply(String keyword);
+
+    List<ReplyContent> getAll();
+
+    int addOne(ReplyContent replyContent);
 }

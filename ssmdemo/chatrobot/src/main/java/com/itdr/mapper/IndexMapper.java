@@ -1,5 +1,8 @@
 package com.itdr.mapper;
 
+import com.itdr.pojo.ReplyContent;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -20,5 +23,13 @@ public interface IndexMapper {
 
     String getAutoReply();
 
-    List<String> getReply(String keyword, String words);
+    List<String> getReplyByKeyWord(String keyword);
+
+    List<String> getReplyByWords(String wordss);
+
+    List<ReplyContent> getAll();
+
+    int addOne(ReplyContent replyContent);
+
+//    List<String> getReply(@Param("keyword") String keyword, @Param("words") String words);
 }

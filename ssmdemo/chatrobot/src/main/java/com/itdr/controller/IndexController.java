@@ -1,5 +1,6 @@
 package com.itdr.controller;
 
+import com.itdr.pojo.ReplyContent;
 import com.itdr.service.IndexService;
 import com.itdr.service.IndexServiceImpl;
 
@@ -35,8 +36,21 @@ public class IndexController {
      * 根据输入内容获取回复
      * @return
      */
-    public List<String> getReply(String keyword, String words){
-        return indexService.getReply(keyword,words);
+    public List<String> getReply(String keyword){
+        return indexService.getReply(keyword);
     }
 
+
+//    ===========================
+    /**
+     * 根据输入内容获取回复
+     * @return
+     */
+    public List<ReplyContent> getAll(){
+        return indexService.getAll();
+    }
+
+    public int addOne(ReplyContent replyContent){
+        return indexService.addOne(replyContent);
+    }
 }
