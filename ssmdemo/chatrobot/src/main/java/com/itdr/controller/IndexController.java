@@ -18,39 +18,44 @@ public class IndexController {
 
     /**
      * 获取默认回复
+     *
      * @return
      */
-    public String getDeflutReply(){
+    public String getDeflutReply() {
         return indexService.getDeflutReply();
     }
 
     /**
      * 获取自动回复
+     *
      * @return
      */
-    public String getAutoReply(){
+    public String getAutoReply() {
         return indexService.getAutoReply();
     }
 
     /**
      * 根据输入内容获取回复
+     *
      * @return
      */
-    public List<String> getReply(String keyword){
+    public List<String> getReply(String keyword) {
         return indexService.getReply(keyword);
     }
 
 
 //    ===========================
+
     /**
      * 根据输入内容获取回复
+     *
      * @return
      */
-    public List<ReplyContent> getAll(){
+    public List<ReplyContent> getAll() {
         return indexService.getAll();
     }
 
-    public int addOne(ReplyContent replyContent){
+    public int addOne(ReplyContent replyContent) {
         return indexService.addOne(replyContent);
     }
 }

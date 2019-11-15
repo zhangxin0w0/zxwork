@@ -35,4 +35,10 @@
     <select id="getAll" resultType="ReplyContent">
         select id,keyword,words,reply,cid,create_time,update_time from replycontent
     </select>
+
+    <select id="getAll1" resultType="ReplyContent">
+        <if test="a !=1 and ">
+
+        </if>
+    </select>
 </mapper>
