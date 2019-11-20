@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itdr.mapper.IndexMapper">
 
+    <resultMap id="rc" type="ReplyContent">
+
+    </resultMap>
+
     <!--增加一条新数据-->
     <insert id="addOne" parameterType="ReplyContent">
         insert into replycontent values
@@ -11,8 +15,12 @@
     </insert>
 
 
+    <delete id="deleteOne" parameterType="integer">
+        delete from replycontent where id = #{id}
+    </delete>
+
     <!--获取默认回复-->
-    <select id="getDeflutReply" resultType="string">
+    <select id="getDefaultReply" resultType="string">
         select reply from replycontent where cid = 1
     </select>
 
@@ -26,7 +34,7 @@
         select reply from replycontent where keyword = #{keyword}
     </select>
 
-    <!--根据关键词获取回复-->
+    <!--根据模糊字获取回复-->
     <select id="getReplyByWords" parameterType="string" resultType="string">
         select reply from replycontent where words like #{wordss}
     </select>
@@ -36,9 +44,4 @@
         select id,keyword,words,reply,cid,create_time,update_time from replycontent
     </select>
 
-    <select id="getAll1" resultType="ReplyContent">
-        <if test="a !=1 and ">
-
-        </if>
-    </select>
 </mapper>

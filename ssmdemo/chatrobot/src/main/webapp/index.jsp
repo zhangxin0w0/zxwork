@@ -30,9 +30,9 @@
 </head>
 <body>
 <div>
-    <a href="#">唤醒界灵小可爱</a>
+    <a href="/index/getDefaultReply.do">唤醒界灵小可爱</a>
     <br>
-    <a href="listdemo.jsp">天地意志维护</a>
+    <a href="/index/getAll.do">天地意志维护</a>
 </div>
 </body>
 </html>

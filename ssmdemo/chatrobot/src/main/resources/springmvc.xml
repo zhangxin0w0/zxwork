@@ -16,12 +16,22 @@
     </context:component-scan>
 
     <!--开启注解驱动-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!-- 配置逻辑视图的前缀 -->
-        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="prefix" value="/" />
         <!-- 配置逻辑视图的后缀 -->
         <property name="suffix" value=".jsp" />
     </bean>

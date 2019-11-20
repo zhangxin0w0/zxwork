@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -16,10 +17,16 @@
 <body style="background: #e1e9eb;">
 <form action="" id="mainForm" method="post">
     <div class="right">
-        <div class="current">当前位置：<a href="javascript:void(0)" style="color:#6E6E6E;">内容管理</a> &gt; 内容列表</div>
+        <div class="current">
+            当前位置：<a href="javascript:void(0)" style="color:#6E6E6E;">
+            内容管理</a> &gt; 内容列表
+            <div style="float: right"><a href="${pageContext.request.contextPath}/index.jsp">回到首页</a></div>
+        </div>
         <div class="rightCont">
-            <p class="g_title fix">内容列表 <a class="btn03" href="#">新 增</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn03"
-                                                                                                    href="#">删 除</a></p>
+            <p class="g_title fix">内容列表
+                <a class="btn03" href="${pageContext.request.contextPath}/add.jsp">新 增</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a class="btn03" href="#">删 除</a>
+            </p>
             <table class="tab1">
                 <tbody>
                 <tr>
@@ -47,38 +54,28 @@
                         <th>分类标签</th>
                         <th>操作</th>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox"/></td>
-                        <td>1</td>
-                        <td>无</td>
-                        <td>无</td>
-                        <td>你找我有什么事情吗？</td>
-                        <td>默认回复</td>
-                        <td>
-                            <a href="#">修改</a>&nbsp;&nbsp;&nbsp;
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
-                    <tr style="background-color:#ECF6EE;">
-                        <td><input type="checkbox"/></td>
-                        <td>2</td>
-                        <td>无</td>
-                        <td>无</td>
-                        <td>你说的我听不懂~</td>
-                        <td>自动回复</td>
-                        <td>
-                            <a href="#">修改</a>&nbsp;&nbsp;&nbsp;
-                            <a href="#">删除</a>
-                        </td>
-                    </tr>
+                    <c:forEach items="${pageinfo.list}" var="reply">
+                        <tr>
+                            <td><input type="checkbox"/></td>
+                            <td>${reply.id}</td>
+                            <td>${reply.keyword}</td>
+                            <td>${reply.words}</td>
+                            <td>${reply.reply}</td>
+                            <td>${reply.cid}</td>
+                            <td>
+                                <a href="#">修改</a>&nbsp;&nbsp;&nbsp;
+                                <a href="/index/deleteOne.do?id=${reply.id}">删除</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
 
                     </tbody>
                 </table>
                 <div class='page fix'>
-                    共 <b>4</b> 条
+                    共 <b>${pageinfo.total}</b> 条
                     <a href='###' class='first'>首页</a>
                     <a href='###' class='pre'>上一页</a>
-                    当前第<span>1/1</span>页
+                    当前第<span>${pageinfo.navigateFirstPage}/${pageinfo.pages}</span>页
                     <a href='###' class='next'>下一页</a>
                     <a href='###' class='last'>末页</a>
                     跳至&nbsp;<input type='text' value='1' class='allInput w28'/>&nbsp;页&nbsp;

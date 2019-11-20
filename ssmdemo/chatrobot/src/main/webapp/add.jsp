@@ -21,43 +21,46 @@
     </style>
 </head>
 <body style="background: #e1e9eb;">
-<form action="" id="mainForm" method="post">
+<form action="/index/addone.do" id="mainForm" method="post">
 
     <div class="current">当前位置：<a href="javascript:void(0)" style="color:#6E6E6E;">内容管理</a> &gt; 增加内容</div>
     <div class="rightCont">
-        <p class="g_title fix">增加内容 <a class="btn03" href="#">新 增</a>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-        <div class="zixun fix">
-            <table class="tab2" width="100%">
-                <tbody>
-                <tr>
-                    <th>关键词</th>
-                    <th>模糊字</th>
-                    <th>回复内容</th>
-                    <th>分类标签</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" placeholder="请输入关键词" name="keyword">
-                    </td>
-                    <td>
-                        <input type="text" placeholder="请输入模糊字" name="words">
-                    </td>
-                    <td>
-                        <input type="text" placeholder="请输入回复内容" name="reply">
-                    </td>
-                    <td>
-                        <select>
-                            <option>请选择分类标签</option>
-                            <option value="1">默认回复</option>
-                            <option value="2">自动回复</option>
-                            <option value="3">关键词回复</option>
-                            <option value="4">模糊字回复</option>
-                        </select>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            <p class="g_title fix">增加内容
+                <input type="submit" value="新增" class="btn03">
+                <%--<a  href="#">新 增</a>&nbsp;&nbsp;&nbsp;&nbsp;--%>
+            </p>
+            <div class="zixun fix">
+                <table class="tab2" width="100%">
+                    <tbody>
+                    <tr>
+                        <th>关键词</th>
+                        <th>模糊字</th>
+                        <th>回复内容</th>
+                        <th>分类标签</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="请输入关键词" name="keyword">
+                        </td>
+                        <td>
+                            <input type="text" placeholder="请输入模糊字" name="words">
+                        </td>
+                        <td>
+                            <input type="text" placeholder="请输入回复内容" name="reply">
+                        </td>
+                        <td>
+                            <select name="cid">
+                                <option>请选择分类标签</option>
+                                <option value="1">默认回复</option>
+                                <option value="2">自动回复</option>
+                                <option value="3">关键词回复</option>
+                                <option value="4">模糊字回复</option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
     </div>
 </form>
 </body>

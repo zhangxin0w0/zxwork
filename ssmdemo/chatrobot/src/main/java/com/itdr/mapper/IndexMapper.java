@@ -19,7 +19,7 @@ public interface IndexMapper {
 //3.接口中返回值类型与映射文件中返回值类型要一致
 //4.映射文件中命名空间与绑定接口绑定
 
-    String getDeflutReply();
+    String getDefaultReply();
 
     String getAutoReply();
 
@@ -30,6 +30,8 @@ public interface IndexMapper {
     List<ReplyContent> getAll();
 
     int addOne(ReplyContent replyContent);
+
+    int deleteOne(Integer id);
 
 //    List<String> getReply(@Param("keyword") String keyword, @Param("words") String words);
 }

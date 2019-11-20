@@ -5,13 +5,13 @@
   Time: 22:26
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
     <style>
         body {
-            background-image: url("1.jpg");
+            background-image: url("${pageContext.request.contextPath}/1.jpg");
             background-repeat: no-repeat;
         }
 
@@ -44,7 +44,7 @@
         #content {
             width: 100%;
             height: 450px;
-            overflow-y:scroll;
+            overflow-y: scroll;
         }
 
         #cleft {
@@ -102,6 +102,7 @@
 </head>
 <body>
 <div id="wk">
+    <a href="/index/getAll.do">进入控制中心</a>
     <div id="chat">
         <div id="topnar">界灵小可爱</div>
         <div id="content">
@@ -109,7 +110,7 @@
                 <div class="cf">
                     <span>界灵小可爱：</span>
                     <br>
-                    凡人，何事惊扰本大人？
+                    ${dl}
                 </div>
             </div>
             <div id="cright">
@@ -124,10 +125,12 @@
     </div>
 </div>
 </body>
+<script src="${pageContext.request.contextPath}/jquery-3.3.1.js"></script>
 <script>
     function sendMessage() {
         var tex = document.getElementById("send-text").value;
         var cright = document.getElementById("cright");
+
 
         //创建回答节点
         var d2 = document.createElement("div");
@@ -146,8 +149,42 @@
         document.getElementById("send-text").value = "";
         // 让消息自动滚动
         var wk = document.getElementById("content");
-        wk.scrollTop=wk.scrollHeight;
+        wk.scrollTop = wk.scrollHeight;
+
+        //延时一秒执行
+        setTimeout(2000, sendAjax(tex));
     }
+
+    //发送ajax请求
+    function sendAjax(tex) {
+        $.post(
+            "/index/getReply.do",
+            {
+                keyword: tex
+            },
+            function (data) {
+                //成功获取数据后，把数据内容放到左边区域
+                var cleft = document.getElementById("cleft");
+
+                //创建回答节点
+                for (var i = 0; i < data.length; i++) {
+                    var d2 = document.createElement("div");
+                    var d2span = document.createElement("span");
+                    var d2br = document.createElement("br");
+                    d2span.innerText = "界灵小可爱：";
+                    var d2node = document.createTextNode(data[i]);
+                    d2.appendChild(d2span);
+                    d2.appendChild(d2br);
+                    d2.appendChild(d2node);
+                    d2.classList.add("cf");
+                    //把新节点放到右侧内容区域
+                    cleft.appendChild(d2);
+                }
+
+            }
+        )
+    }
+
 
     //文本框回车发送
     document.onkeydown = function (e) {

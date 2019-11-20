@@ -3,10 +3,15 @@ package com;
 import com.itdr.controller.IndexController;
 import com.itdr.mapper.IndexMapper;
 import com.itdr.pojo.ReplyContent;
+import com.itdr.service.IndexService;
 import com.itdr.utils.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.lang.model.element.VariableElement;
 import java.util.List;
@@ -18,9 +23,13 @@ import java.util.List;
  * @author Air张
  * @since JDK 1.8
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:spring.xml")
 public class TestDemo {
+    @Autowired
+    private IndexService indexService;
 
-    @Test
+   /* @Test
     public void test1(){
         SqlSessionFactory sqlSessionFactory = SqlSessionUtil.getSqlSessionFactory();
         SqlSession sqlSession = sqlSessionFactory.openSession();
@@ -58,17 +67,30 @@ public class TestDemo {
         for (ReplyContent s : all) {
             System.out.println(s);
         }
-    }
+    }*/
 
     @Test
-    public void test6(){
-        IndexController indexController = new IndexController();
+    public void test6() {
         ReplyContent replyContent = new ReplyContent();
-        replyContent.setKeyword("在吗？");
-        replyContent.setReply("是的，我一直在等你！");
+        replyContent.setKeyword("你是谁？");
+        replyContent.setReply("我是你最好的伙伴，赛丽亚！");
         replyContent.setCid(3);
-        int i = indexController.addOne(replyContent);
+        int i = indexService.addOne(replyContent);
         System.out.println(i);
+    }
 
+
+    /*@Test
+    public void test7() {
+        List<ReplyContent> all = indexService.getAll();
+        for (ReplyContent replyContent : all) {
+            System.out.println(replyContent);
+        }
+    }*/
+
+    @Test
+    public void test8() {
+        int i = indexService.deleteOne(8);
+        System.out.println(i);
     }
 }

@@ -1,10 +1,14 @@
 package com.itdr.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.itdr.mapper.IndexMapper;
 import com.itdr.pojo.ReplyContent;
 import com.itdr.utils.SqlSessionUtil;
 import com.mysql.jdbc.StringUtils;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,14 +19,15 @@ import java.util.List;
  * @author Air张
  * @since JDK 1.8
  */
+@Service
 public class IndexServiceImpl implements IndexService {
 
-    private SqlSession sqlSession =  SqlSessionUtil.getSqlSessionFactory().openSession();
-    private IndexMapper indexMapper =sqlSession.getMapper(IndexMapper.class);
+    @Autowired
+    private IndexMapper indexMapper;
 
     @Override
-    public String getDeflutReply() {
-        return indexMapper.getDeflutReply();
+    public String getDefaultReply() {
+        return indexMapper.getDefaultReply();
     }
 
     @Override
@@ -65,16 +70,33 @@ public class IndexServiceImpl implements IndexService {
         return li;
     }
 
+    //获取所有回复内容
     @Override
-    public List<ReplyContent> getAll() {
-        return indexMapper.getAll();
+    public PageInfo getAll(Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<ReplyContent> all = indexMapper.getAll();
+
+        PageInfo pageInfo = new PageInfo(all);
+        return pageInfo;
     }
 
+    //增加一条新数据
     @Override
     public int addOne(ReplyContent replyContent) {
         //参数非空判断
+
+        //增加一条数据
         int i = indexMapper.addOne(replyContent);
-        sqlSession.commit();
+        return i;
+    }
+
+    //删除一条数据
+    @Override
+    public int deleteOne(Integer id) {
+        //参数非空判断
+
+        //增加一条数据
+        int i = indexMapper.deleteOne(id);
         return i;
     }
 }

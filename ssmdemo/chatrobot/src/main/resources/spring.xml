@@ -37,6 +37,19 @@
         <property name="configLocation" value="classpath:SqlMapConfig.xml" />
         <!-- 配置数据源 -->
         <property name="dataSource" ref="dataSource" />
+        <!-- 注意其他配置 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                            params=value1
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!-- Mapper代理的方式开发方式二，扫描包方式配置代理 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
