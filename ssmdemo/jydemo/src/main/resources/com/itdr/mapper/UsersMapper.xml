@@ -26,8 +26,8 @@
     insert into jyuser (id, uname, upsd, 
       status, create_time, update_time
       )
-    values (#{id,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{upsd,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    values (null, #{uname,jdbcType=VARCHAR}, #{upsd,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.itdr.pojo.Users" >

@@ -34,7 +34,7 @@
     <!-- 配置SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 配置mybatis核心配置文件 -->
-        <property name="configLocation" value="classpath:SqlMapConfig.xml" />
+        <property name="configLocation" value="classpath:mb.xml" />
         <!-- 配置数据源 -->
         <property name="dataSource" ref="ds1" />
     </bean>
