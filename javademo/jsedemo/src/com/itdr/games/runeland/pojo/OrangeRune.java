@@ -11,27 +11,16 @@ public class OrangeRune extends Epigraph {
     private int adHurt; //物理攻击力
     private int apHurt; //法术攻击力
     private String adSpeed; //攻速
-
-    public int b = 10;
-
+    static final String COLOR = "橙色";
 
     public OrangeRune() {
 
     }
 
-    public OrangeRune(String s) {
-
-        System.out.println("这是子类的有参构造");
-    }
-
-
-    public void showOrange() {
-        int a = 1;
-        System.out.println("这是橙色子类的方法" + a);
-    }
-
-    private void showOrange2() {
-        System.out.println("这是橙子类的私有方法");
+    @Override
+    public void show() {
+        System.out.println("ename"+ename);
+        System.out.println("adHurt:"+adHurt);
     }
 
     public int getAdHurt() {
@@ -56,13 +45,5 @@ public class OrangeRune extends Epigraph {
 
     public void setAdSpeed(String adSpeed) {
         this.adSpeed = adSpeed;
-    }
-
-    public int getA() {
-        return a;
-    }
-
-    public void setA(int a) {
-        this.a = a;
     }
 }
