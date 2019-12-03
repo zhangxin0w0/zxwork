@@ -10,6 +10,16 @@ package com.itdr.games.auctiondemo.pojo;
 public class Users {
     private String uname;
     private String password;
+    private ShopCar shopCar = new ShopCar();
+    private int[] a = new int[5];
+
+    public ShopCar getShopCar() {
+        return shopCar;
+    }
+
+    public void setShopCar(ShopCar shopCar) {
+        this.shopCar = shopCar;
+    }
 
     public String getUname() {
         return uname;
