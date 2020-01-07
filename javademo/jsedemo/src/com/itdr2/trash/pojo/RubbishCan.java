@@ -10,7 +10,25 @@ package com.itdr2.trash.pojo;
 public class RubbishCan {
     private Integer id;
     private String rtype;
+    private String rname;
     private Integer rl;
+    private Integer sjrl;
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
+    }
+
+    public Integer getSjrl() {
+        return sjrl;
+    }
+
+    public void setSjrl(Integer sjrl) {
+        this.sjrl = sjrl;
+    }
 
     public Integer getId() {
         return id;

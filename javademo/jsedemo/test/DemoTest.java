@@ -1,3 +1,4 @@
+import com.A;
 import org.junit.Test;
 
 /**
@@ -9,7 +10,10 @@ import org.junit.Test;
  */
 public class DemoTest {
     @Test
-    public void test1(){
-        System.out.println("单元测试");
+    public void test1() {
+        char c = 127;
+        System.out.println(c+1);
     }
+
+
 }

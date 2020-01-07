@@ -9,4 +9,6 @@ package com.itdr2.trash.service;
  */
 public interface UsersService {
     void register(String uname);
+
+    int updateSort(Integer num);
 }
