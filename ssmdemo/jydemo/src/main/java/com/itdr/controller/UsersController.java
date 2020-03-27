@@ -1,11 +1,14 @@
 package com.itdr.controller;
 
 import com.itdr.common.ResponseCode;
+import com.itdr.pojo.Users;
 import com.itdr.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  * ClassName: UsersController
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/back/users/")
 @ResponseBody
+@SessionAttributes
 public class UsersController {
 
     //引入业务层
@@ -47,4 +51,19 @@ public class UsersController {
         ResponseCode rs = usersService.deleteOne(id);
         return rs;
     }
+
+    //根据ID查找一个用户
+    @RequestMapping("selectone.do")
+    public ResponseCode selectOne(Integer id){
+        ResponseCode rs = usersService.selectOne(id);
+        return rs;
+    }
+
+    //修改用户数据
+    @RequestMapping("updateone.do")
+    public ResponseCode updateOne(Users u){
+        ResponseCode rs = usersService.updateOne(u);
+        return rs;
+    }
+
 }

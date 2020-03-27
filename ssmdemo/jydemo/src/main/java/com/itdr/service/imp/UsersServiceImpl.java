@@ -47,4 +47,35 @@ public class UsersServiceImpl implements UsersService {
         int i = usersMapper.deleteByPrimaryKey(id);
         return pd(i, "删除用户失败");
     }
+
+    //查找一个用户
+    @Override
+    public ResponseCode selectOne(Integer id) {
+        ResponseCode rs = null;
+        //参数非空判断
+        Users users = usersMapper.selectByPrimaryKey(id);
+        //判断数据
+        if(users == null){
+            rs = ResponseCode.toFail("该用户不存在！");
+        }
+        rs = ResponseCode.toSuccess(users);
+        return rs;
+    }
+
+    //修改用户名
+    @Override
+    public ResponseCode updateOne(Users u) {
+        //查找该用户是否存在
+        ResponseCode responseCode = selectOne(u.getId());
+        if(responseCode.getData() == null){
+            return ResponseCode.toFail("该用户不存在！");
+        }
+        //用户存在的情况下，去修改用户名
+        int i = usersMapper.updateByPrimaryKeySelective(u);
+        if(i <=0){
+            return ResponseCode.toFail("用户修改失败！");
+        }
+        //返回修改后的用户数据
+        return ResponseCode.toSuccess(i);
+    }
 }

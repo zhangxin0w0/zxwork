@@ -1,5 +1,7 @@
 package com.itdr.pojo;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Date;
 
 public class Users {

@@ -1,6 +1,7 @@
 package com.itdr.service;
 
 import com.itdr.common.ResponseCode;
+import com.itdr.pojo.Users;
 
 /**
  * ClassName: UsersService
@@ -14,4 +15,8 @@ public interface UsersService {
     ResponseCode addone(String uname, String psd);
 
     ResponseCode deleteOne(Integer id);
+
+    ResponseCode selectOne(Integer id);
+
+    ResponseCode updateOne(Users u);
 }
