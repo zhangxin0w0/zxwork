@@ -1,4 +1,6 @@
-package com.itdr.anli;
+package com.itdr.pojo;
+
+import java.util.List;
 
 /**
  * ClassName: JueSe
@@ -15,7 +17,7 @@ public class JueSe {
 //    昵称
     private String nickName;
 //    道具包裹
-//    private
+    private List<Goods> goodsList;
 //    等级
     private int grade;
 //    经验值
@@ -23,6 +25,19 @@ public class JueSe {
 //    金币
     private int money;
 
+    public void lvUp(){
+        if(exe >= 100){
+            this.grade = exe/100;
+        }
+    }
+
+    public List<Goods> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<Goods> goodsList) {
+        this.goodsList = goodsList;
+    }
 
     public String getProfession() {
         return profession;

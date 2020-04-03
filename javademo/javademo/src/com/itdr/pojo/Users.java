@@ -1,6 +1,5 @@
-package com.itdr.anli;
+package com.itdr.pojo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
