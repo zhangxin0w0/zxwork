@@ -10,25 +10,57 @@ import java.util.List;
  * @since JDK 1.8
  */
 public class JueSe {
-//    职业
+    //    职业
     private String profession;
-//    性别
+    //    性别
     private Integer sex;
-//    昵称
+    //    昵称
     private String nickName;
-//    道具包裹
+    //    道具包裹
     private List<Goods> goodsList;
-//    等级
+    //    等级
     private int grade;
-//    经验值
+    //    经验值
     private int exe;
-//    金币
+    //    金币
     private int money;
 
-    public void lvUp(){
-        if(exe >= 100){
-            this.grade = exe/100;
+    //    光明信仰值
+    private int lightBeliefValue;
+    //    黑暗信仰值
+    private int darkBeliefValue;
+    //    阵营
+    private String camp;
+
+    // 角色等级自动成绩
+    public void autoLvUp() {
+        if (exe >= 100) {
+            this.grade = exe / 100;
         }
+    }
+
+    public int getLightBeliefValue() {
+        return lightBeliefValue;
+    }
+
+    public void setLightBeliefValue(int lightBeliefValue) {
+        this.lightBeliefValue = lightBeliefValue;
+    }
+
+    public int getDarkBeliefValue() {
+        return darkBeliefValue;
+    }
+
+    public void setDarkBeliefValue(int darkBeliefValue) {
+        this.darkBeliefValue = darkBeliefValue;
+    }
+
+    public String getCamp() {
+        return camp;
+    }
+
+    public void setCamp(String camp) {
+        this.camp = camp;
     }
 
     public List<Goods> getGoodsList() {

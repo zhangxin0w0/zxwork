@@ -59,6 +59,9 @@ public class ITDRPageUtil {
             }else {
                 System.out.println("角色道具：[空]");
             }
+            System.out.println("光明信仰值："+jueSeList.get(j).getLightBeliefValue());
+            System.out.println("黑暗信仰值："+jueSeList.get(j).getDarkBeliefValue());
+            System.out.println("阵营所属："+jueSeList.get(j).getCamp());
         }
         System.out.println("===按任意键返回上一页===");
     }

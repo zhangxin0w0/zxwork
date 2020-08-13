@@ -11,6 +11,6 @@ public class TestDemo {
 
     @Test
     public void test1(){
-
+        System.out.println("装备");
     }
 }

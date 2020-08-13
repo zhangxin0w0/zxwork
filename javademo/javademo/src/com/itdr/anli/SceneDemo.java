@@ -30,10 +30,10 @@ public class SceneDemo {
     private static List<Copys> copysList = new ArrayList<>();
 
     static {
-        Copys c = new Copys(1, "破除迷惘的双眼", 'D', 100);
-        Copys c2 = new Copys(2, "艰难的抉择", 'D', 100);
-        Copys c3 = new Copys(3, "神秘的土罐", 'B', 100);
-        Copys c4 = new Copys(4, "高耸的尖塔", 'C', 100);
+        Copys c = new Copys(1, "破除迷惘的双眼", 'D', 100, true);
+        Copys c2 = new Copys(2, "艰难的抉择", 'D', 100, true);
+        Copys c3 = new Copys(3, "神秘的土罐", 'B', 100, true);
+        Copys c4 = new Copys(4, "高耸的尖塔", 'C', 100, true);
         copysList.add(c);
         copysList.add(c2);
         copysList.add(c3);
@@ -157,82 +157,120 @@ public class SceneDemo {
                                                 break;
                                             }
 
-                                            int num3 = 0;
-                                            while (num3 != 9) {
-                                                // 副本详情页
-                                                ITDRPageUtil.fuBenDetail();
-                                                num3 = sc.nextInt();
-                                                switch (num3) {
-                                                    case 1:
-                                                        // 开始挑战
-                                                        switch (fuBenID) {
+                                            // 当副本开关开启的时候才可以挑战
+                                            if (copysList.get(fuBenID - 1).getOnOrOff()) {
+
+                                                // 判断当前选择角色的等级
+                                                if (fuBenID == 2 && selectJueSe.getGrade() < 5) {
+                                                    System.out.println("当前等级无法挑战该副本！");
+                                                    System.out.println("请按任意键返回重新选择副本");
+                                                    sc.next();
+                                                } else {
+
+                                                    int num3 = 0;
+                                                    while (num3 != 9) {
+                                                        // 副本详情页
+                                                        ITDRPageUtil.fuBenDetail();
+                                                        num3 = sc.nextInt();
+                                                        switch (num3) {
                                                             case 1:
-                                                                int j;
-                                                                for (j = 1; j < 5; j++) {
-                                                                    Map<String, List<String>> map = PlayContentUtil.play(j);
-                                                                    List<String> play = map.get("end");
-                                                                    List<String> falseList = map.get("false");
+                                                                // 开始挑战
+                                                                switch (fuBenID) {
+                                                                    case 1:
+                                                                        int j;
+                                                                        for (j = 1; j < 5; j++) {
+                                                                            Map<String, List<String>> map = PlayContentUtil.play(j);
+                                                                            List<String> play = map.get("end");
+                                                                            List<String> falseList = map.get("false");
 
-                                                                    System.out.print("做出抉择：[");
-                                                                    for (int k = 0; k < play.size(); k++) {
-                                                                        if (k != play.size() - 1) {
-                                                                            System.out.print(play.get(k) + ",");
-                                                                        } else {
-                                                                            System.out.println(play.get(k) + "]");
+                                                                            System.out.print("做出抉择：[");
+                                                                            for (int k = 0; k < play.size(); k++) {
+                                                                                if (k != play.size() - 1) {
+                                                                                    System.out.print(play.get(k) + ",");
+                                                                                } else {
+                                                                                    System.out.println(play.get(k) + "]");
+                                                                                }
+                                                                            }
+                                                                            System.out.println("请输入错误数据，以/隔开，按回车结束输入");
+
+                                                                            // 获得用户输入数据
+                                                                            String next = sc.next();
+                                                                            // 判断是否通过
+                                                                            boolean pass = PlayContentUtil.pass(falseList, j, next);
+
+                                                                            // 通关成功之后，怎么计算经验值和金币收益
+                                                                            if (!pass || (pass && (j == 4))) {
+                                                                                PlayContentUtil.passGetExeAndMoney(j, selectJueSe);
+                                                                                break;
+                                                                            }
+
                                                                         }
-                                                                    }
-                                                                    System.out.println("请输入错误数据，以/隔开，按回车结束输入");
-
-                                                                    // 获得用户输入数据
-                                                                    String next = sc.next();
-                                                                    // 判断是否通过
-                                                                    boolean pass = PlayContentUtil.pass(falseList, j, next);
-
-                                                                    // 通关成功之后，怎么计算经验值和金币收益
-                                                                    if (!pass || (pass && (j == 4))) {
-                                                                        PlayContentUtil.passGetExeAndMoney(j,selectJueSe);
+                                                                        // 副本挑战结束收益结算页
+                                                                        ITDRPageUtil.getExeAndMoneyPage(j);
+                                                                        sc.next();
                                                                         break;
-                                                                    }
+
+                                                                    // 艰难的抉择
+                                                                    case 2:
+                                                                        if (selectJueSe.getCamp().equals("无")) {
+                                                                            boolean bol = false;
+                                                                            while (!bol) {
+                                                                                String s = PlayContentUtil.play2();
+                                                                                System.out.println(s);
+                                                                                System.out.println("请回答是或否");
+                                                                                String next = sc.next();
+                                                                                bol = PlayContentUtil.pass2(next, selectJueSe);
+                                                                            }
+                                                                            copysList.get(1).setOnOrOff(false);
+                                                                            // 副本挑战结束收益结算页
+                                                                            ITDRPageUtil.getExeAndMoneyPage(1);
+                                                                            sc.next();
+                                                                        }else{
+                                                                            System.out.println("当前副本不可重复挑战！");
+                                                                            System.out.println("按任意键返回城镇");
+                                                                            sc.next();
+                                                                        }
+                                                                        break;
                                                                 }
-                                                                // 副本挑战结束收益结算页
-                                                                ITDRPageUtil.getExeAndMoneyPage(j);
-                                                                sc.next();
+                                                                // 每次副本挑战结束，自动结算角色等级
+                                                                selectJueSe.autoLvUp();
+                                                                break;
+                                                            case 2:
+                                                                // 使用道具
+                                                                // 获取道具列表
+                                                                if (selectJueSe.getGoodsList().size() > 0) {
+                                                                    ITDRPageUtil.goodsList(selectJueSe.getGoodsList());
+                                                                    // 这是选择的道具ID
+                                                                    int goodsID = sc.nextInt();
+                                                                }
+                                                                break;
+                                                            case 3:
+                                                                // 开启商店
+                                                                ITDRPageUtil.storeList(goodsListStart);
+                                                                // 这是购买的道具ID
+                                                                int goodsID = sc.nextInt();
+                                                                // 放到当前角色的包裹里
+                                                                if (selectJueSe.getMoney() >= goodsListStart.get(goodsID).getPrice()) {
+                                                                    // 扣除道具金币
+                                                                    selectJueSe.setMoney(selectJueSe.getMoney() - goodsListStart.get(goodsID).getPrice());
+                                                                    // 把买好的道具放到包裹里
+                                                                    selectJueSe.getGoodsList().add(goodsListStart.get(goodsID));
+                                                                } else {
+                                                                    System.out.println("金额不足，无法购买，按任意键返回上一页");
+                                                                    sc.next();
+                                                                }
+                                                                break;
+                                                            default:
+                                                                num3 = 9;
                                                                 break;
                                                         }
-                                                        // 每次副本挑战结束，自动结算角色等级
-                                                        selectJueSe.lvUp();
-                                                        break;
-                                                    case 2:
-                                                        // 使用道具
-                                                        // 获取道具列表
-                                                        if (selectJueSe.getGoodsList().size() > 0) {
-                                                            ITDRPageUtil.goodsList(selectJueSe.getGoodsList());
-                                                            // 这是选择的道具ID
-                                                            int goodsID = sc.nextInt();
-                                                        }
-                                                        break;
-                                                    case 3:
-                                                        // 开启商店
-                                                        ITDRPageUtil.storeList(goodsListStart);
-                                                        // 这是购买的道具ID
-                                                        int goodsID = sc.nextInt();
-                                                        // 放到当前角色的包裹里
-                                                        if (selectJueSe.getMoney() >= goodsListStart.get(goodsID).getPrice()) {
-                                                            // 扣除道具金币
-                                                            selectJueSe.setMoney(selectJueSe.getMoney() - goodsListStart.get(goodsID).getPrice());
-                                                            // 把买好的道具放到包裹里
-                                                            selectJueSe.getGoodsList().add(goodsListStart.get(goodsID));
-                                                        } else {
-                                                            System.out.println("金额不足，无法购买，按任意键返回上一页");
-                                                            sc.next();
-                                                        }
-                                                        break;
-                                                    default:
-                                                        num3 = 9;
-                                                        break;
+                                                    }
                                                 }
+                                            } else {
+                                                System.out.println("当前选择副本已关闭，无法挑战！");
+                                                System.out.println("请按任意键返回重新选择副本");
+                                                sc.next();
                                             }
-
                                         }
 
                                     } else {
@@ -281,13 +319,15 @@ public class SceneDemo {
         jueSe.setSex(sex);
         jueSe.setNickName(nickName);
         // 初始化等级为1
-        jueSe.setGrade(1);
+        jueSe.setGrade(5);
         // 初始化经验值为0
         jueSe.setExe(0);
         // 初始化金币为0
         jueSe.setMoney(0);
         // 配置道具包裹
         jueSe.setGoodsList(goodsArrayList);
+        // 初始阵营为无
+        jueSe.setCamp("无");
         return jueSe;
     }
 

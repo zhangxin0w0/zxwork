@@ -16,14 +16,25 @@ public class Copys {
     private Character level;
     // 副本收益
     private Integer money;
+    //  副本开关
+    private boolean onOrOff;
 
     public Copys() {}
 
-    public Copys(Integer id, String cname, Character level, Integer money) {
+    public Copys(Integer id, String cname, Character level, Integer money,boolean onOrOff) {
         this.id = id;
         this.cname = cname;
         this.level = level;
         this.money = money;
+        this.onOrOff = onOrOff;
+    }
+
+    public boolean getOnOrOff() {
+        return onOrOff;
+    }
+
+    public void setOnOrOff(boolean onOrOff) {
+        this.onOrOff = onOrOff;
     }
 
     public Integer getId() {
