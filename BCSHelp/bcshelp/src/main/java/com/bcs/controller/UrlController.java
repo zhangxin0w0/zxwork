@@ -1,6 +1,8 @@
 package com.bcs.controller;
 
 import com.bcs.common.ServerResponse;
+import com.bcs.service.UrlService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/portal/url/")
 public class UrlController {
+    @Autowired
+    private UrlService urlService;
 
     // 获取一个分类下所有连接
     @RequestMapping("all.do")
-    public ServerResponse getAll(){
-        ServerResponse s = ServerResponse.successRS("Ok");
-        return s;
+    public ServerResponse getAll(Integer cid){
+        return urlService.getAll(cid);
     }
 }
