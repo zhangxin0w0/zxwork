@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <input type="text" placeholder="账户" name="userName" id="a">
+    <input type="password" placeholder="密码" name="passWord" id="b">
+    <input type="button" value="登录" id="btn">
+</form>
+</body>
+<script src="jquery-3.3.1.js"></script>
+<script>
+    $("#btn").click(function () {
+        // 1.获取参数
+        var a = $("#a").val();
+        var b = $("#b").val();
+        // 2.发送请求
+        $.post(
+            "http://localhost:8081/dnf/user/login.do",
+            {
+                "userName":a,
+                "passWord":b
+            },
+            function (da) {
+                if(da.code == 200){
+                    alert(da.data.username)
+                }else{
+                    console.log(da.msg);
+                }
+            },"json"
+        )
+        // 3.处理响应数据
+    })
+</script>
+</html>
